@@ -1,0 +1,23 @@
+{
+  "name": "SimplifiedPrototype",
+  "version": "0.0.0",
+  "homepage": "https://github.com/raiss/Gitualise",
+  "authors": [
+    "Raiss <raisszadeh@gmail.com>"
+  ],
+  "keywords": [
+    "Git",
+    "visualise"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "three.js": "~0.71.0"
+  }
+}
