@@ -9,6 +9,8 @@ requirejs.config({
         Three: 'bower_components/three.js/three',
         orbitControls: 'vendors/OrbitControls',
         Node: 'js/classes/Node',
+        MidiModulator: 'js/classes/MidiModulator',
+        AudioEngine: 'js/classes/AudioEngine',
         main: 'js/main'
     },
     shim: {

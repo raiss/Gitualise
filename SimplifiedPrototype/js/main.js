@@ -1,9 +1,17 @@
-define(['Node', 'Three', 'orbitControls'], function (Node, Three, orbitControls) {
+define(['Node', 'Three', 'orbitControls', 'MidiModulator'], function (Node, Three, orbitControls, MidiModulator) {
   function render() {
     renderer.render( scene, camera );
   }
 
-  var globalRandFactor = 1;
+  var globalRandFactor = .0001;
+
+  var modulate = function (midiMessage) {
+    // this gives us our [command/channel, note, velocity] data.
+    globalRandFactor = midiMessage[2]/1000;
+
+  }
+  MidiModulator.init(modulate)
+
 
   var scene = new THREE.Scene();
   var camera = new THREE.PerspectiveCamera( 60, window.innerWidth / window.innerHeight, 1, 100 );
@@ -77,21 +85,7 @@ define(['Node', 'Three', 'orbitControls'], function (Node, Three, orbitControls)
     return nodes;
   }
 
-  var nodes = createRandomShape(Node, 4000);
-  //
-  // var node1 = {};
-  // node1.size = {width: 2, height: 2, depth: 2};
-  // node1.translate = {x: 5, y:10, z:15};
-  // var nodes = [Node(node1)];
-  //
-  //
-  // var node2 = {};
-  // node2.size = {width: 3, height: 1, depth: 1};
-  // node2.translate = {x: 2, y:-2, z:15};
-  // nodes[1] = Node(node2);
-  //
-  //
-  //
+  var nodes = createRandomShape(Node, 2000);
 
   addNodes(scene, nodes);
 
@@ -99,7 +93,7 @@ define(['Node', 'Three', 'orbitControls'], function (Node, Three, orbitControls)
   var interval = setInterval(function () {
     index++;
     moveNodes(nodes, .02);
-    globalRandFactor = Math.sin(index/100)/5;
+    //globalRandFactor = Math.sin(index/100)/5;
     render();
   }, 1000/60);
 });
