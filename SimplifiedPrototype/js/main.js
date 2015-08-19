@@ -3,7 +3,7 @@ define(['Node', 'Three', 'orbitControls', 'MidiModulator'], function (Node, Thre
     renderer.render( scene, camera );
   }
 
-  var globalRandFactor = .0001;
+  var globalRandFactor = .01;
 
   var modulate = function (midiMessage) {
     // this gives us our [command/channel, note, velocity] data.
@@ -79,7 +79,7 @@ define(['Node', 'Three', 'orbitControls', 'MidiModulator'], function (Node, Thre
       var randomParam = {};
       randomParam.size = {width: .03, height: .03, depth: .03};
       randomParam.translate = {x: random(10), y:random(10), z: random(10)};
-      nodes[i] = shape(randomParam)
+      nodes[i] = shape.init(randomParam)
     }
 
     return nodes;
