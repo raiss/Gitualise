@@ -1,0 +1,47 @@
+[
+  1: {
+    "name": "god",
+    "creates": [
+      {
+        "id": "001",
+        "type": "star",
+        "size": 10,
+        "color": "#f1fff0"
+      },
+      {
+        "id": "002",
+        "type": "star",
+        "size": 10,
+        "color": "#f1fff0"
+      }
+    ]
+  },
+  2: {
+    "name": "god",
+    "updates": [
+      {
+        "id": "001",
+        "move": {
+          "x": 2,
+          "y": 3
+        }
+      }
+    ],
+    "create": [
+      {
+        "id": "003",
+        "type": "star",
+        "size": 10,
+        "color": "#f1fff0"
+      }
+    ]
+  },
+  3: {
+        "name": "god",
+        "delete": [
+          {
+            "id": "001"
+          }
+        ]
+      }
+]
