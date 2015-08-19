@@ -1,20 +1,21 @@
 define([], function() {
   var context;
   var init = function() {
-
-
     try {
-      // Fix up for prefixing
+      //Fix prefixing
       window.AudioContext = window.AudioContext || window.webkitAudioContext;
       context = new AudioContext();
     } catch (e) {
       alert('Web Audio API is not supported in this browser');
     }
+  }
 
+  var getContext = function () {
+    return context;
   }
 
   return {
-    init: init
+    init: init,
+    getContext: getContext
   }
-
 });
