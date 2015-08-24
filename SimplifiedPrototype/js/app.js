@@ -11,6 +11,7 @@ requirejs.config({
         Node: 'js/classes/Node',
         MidiModulator: 'js/classes/MidiModulator',
         AudioEngine: 'js/classes/AudioEngine',
+        Scene: 'js/classes/Scene',
         main: 'js/main'
     },
     shim: {

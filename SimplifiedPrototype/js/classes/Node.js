@@ -21,11 +21,11 @@ define(['Three'], function () {
    return cube;
  }
 
- var move = function (translate) {
+ var move = function (node, translate) {
    if (translate) {
-     cube.translateX(translate.x);
-     cube.translateY(translate.y);
-     cube.translateZ(translate.z);
+     node.translateX(translate.x);
+     node.translateY(translate.y);
+     node.translateZ(translate.z);
    }
  }
 

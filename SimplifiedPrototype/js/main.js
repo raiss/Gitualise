@@ -1,7 +1,5 @@
-define(['Node', 'Three', 'orbitControls', 'MidiModulator'], function (Node, Three, orbitControls, MidiModulator) {
-  function render() {
-    renderer.render( scene, camera );
-  }
+define(['Scene', 'Node', 'Three', 'orbitControls', 'MidiModulator'], function (Scene, Node, Three, orbitControls, MidiModulator) {
+
 
   var globalRandFactor = .01;
 
@@ -10,39 +8,10 @@ define(['Node', 'Three', 'orbitControls', 'MidiModulator'], function (Node, Thre
     globalRandFactor = midiMessage[2]/1000;
 
   }
-  MidiModulator.init(modulate)
+  MidiModulator.init(modulate);
 
-
-  var scene = new THREE.Scene();
-  var camera = new THREE.PerspectiveCamera( 60, window.innerWidth / window.innerHeight, 1, 100 );
-  camera.position.z = 20;
-
-  //Ambient light
-  var light = new THREE.AmbientLight(0x0200ff);
-  scene.add( light );
-
-  //control
-  controls = new THREE.OrbitControls( camera );
-  controls.addEventListener( 'change', render );
-
-  // directional lighting
-  var directionalLight = new THREE.DirectionalLight(0xffffff);
-  directionalLight.position.set(1, 1, 1).normalize();
-  scene.add(directionalLight);
-
-  var renderer = new THREE.WebGLRenderer({ antialias: true });
-  renderer.setClearColor( 0x99999 );
-  renderer.setSize(window.innerWidth, window.innerHeight);
-  document.body.appendChild( renderer.domElement );
-
-
-  var move = function (obj, translate) {
-    if (translate) {
-      obj.translateX(translate.x);
-      obj.translateY(translate.y);
-      obj.translateZ(translate.z);
-    }
-  }
+  //set scene up
+  Scene.init();
 
   var addNodes = function (_scene, _nodes) {
     _nodes.forEach(function (node) {
@@ -51,7 +20,6 @@ define(['Node', 'Three', 'orbitControls', 'MidiModulator'], function (Node, Thre
   }
 
   var moveNodes = function (_nodes, speed) {
-
     var node;
     var translate;
     for (var i = 0; i < _nodes.length; i++) {
@@ -61,10 +29,10 @@ define(['Node', 'Three', 'orbitControls', 'MidiModulator'], function (Node, Thre
         y: random(globalRandFactor),
         z: random(globalRandFactor)
       };
-      move(node, translate);
+      Node.move(node, translate);
     }
-
   }
+
 
   var random = function (maxNum) {
     var randNum = (Math.random() * 6.2);
@@ -87,13 +55,13 @@ define(['Node', 'Three', 'orbitControls', 'MidiModulator'], function (Node, Thre
 
   var nodes = createRandomShape(Node, 2000);
 
-  addNodes(scene, nodes);
+  addNodes(Scene, nodes);
 
   var index = 0
   var interval = setInterval(function () {
     index++;
     moveNodes(nodes, .02);
     //globalRandFactor = Math.sin(index/100)/5;
-    render();
+    Scene.render();
   }, 1000/60);
 });
