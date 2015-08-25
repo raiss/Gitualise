@@ -3,7 +3,7 @@ define(['Three'], function (Three) {
   var init = function () {
     scene = new THREE.Scene();
     camera = new THREE.PerspectiveCamera( 60, window.innerWidth / window.innerHeight, 1, 100 );
-    camera.position.z = 20;
+    camera.position.z = 10;
 
     //Ambient light
     ambientLight = new THREE.AmbientLight(0x0200ff);

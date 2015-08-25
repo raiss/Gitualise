@@ -37,8 +37,8 @@ define(['Scene', 'Node', 'Three', 'orbitControls', 'MidiModulator'], function (S
   var random = function (maxNum) {
     var randNum = (Math.random() * 6.2);
     var sin = Math.sin(randNum);
-    //console.log(sin);
-    return sin*maxNum;
+    // console.log(sin * maxNum);
+    return sin * maxNum;
   }
 
   var createRandomShape = function (shape, numberOfShapes) {
@@ -46,7 +46,7 @@ define(['Scene', 'Node', 'Three', 'orbitControls', 'MidiModulator'], function (S
     for(var i = 0; i < numberOfShapes; i++) {
       var randomParam = {};
       randomParam.size = {width: .03, height: .03, depth: .03};
-      randomParam.translate = {x: random(10), y:random(10), z: random(10)};
+      randomParam.translate = {x: random(1), y:random(1), z: random(1)};
       nodes[i] = shape.init(randomParam)
     }
 
