@@ -4,7 +4,7 @@ define(['Three'], function () {
     var opts = _opts || {};
     cube = createCube(opts);
     if (opts) {
-      move(opts.translate);
+      move(cube, opts.translate);
     }
 
    return cube
