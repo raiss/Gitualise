@@ -1,7 +1,8 @@
-define(['Scene', 'Node', 'Three', 'orbitControls', 'MidiModulator'], function (Scene, Node, Three, orbitControls, MidiModulator) {
+define(['Scene', 'Node', 'Three', 'orbitControls', 'MidiModulator', 'Translate', 'Utils', 'Tween'], function (Scene, Node, Three, orbitControls, MidiModulator, Translate, Utils, Tween) {
 
 
-  var globalRandFactor = .01;
+  var globalRandFactor = 0.1;
+  var random = Utils.random;
 
   var modulate = function (midiMessage) {
     // this gives us our [command/channel, note, velocity] data.
@@ -15,52 +16,54 @@ define(['Scene', 'Node', 'Three', 'orbitControls', 'MidiModulator'], function (S
 
   var addNodes = function (_scene, _nodes) {
     _nodes.forEach(function (node) {
-      _scene.add(node);
+      _scene.add(node.shape);
     });
   }
 
   var moveNodes = function (_nodes, speed) {
-    var node;
     var translate;
+
     for (var i = 0; i < _nodes.length; i++) {
-      node = _nodes[i];
+      var node = _nodes[i];
+      // node.updatePosition();
+
       translate ={
         x: random(globalRandFactor),
         y: random(globalRandFactor),
         z: random(globalRandFactor)
       };
-      Node.move(node, translate);
+
+      var rand = Math.random() * 100;
+      if (rand > 95) {
+        node.moveTo(node.tween, node.shape, translate, 2000);
+      }
     }
   }
 
-
-  var random = function (maxNum) {
-    var randNum = (Math.random() * 6.2);
-    var sin = Math.sin(randNum);
-    // console.log(sin * maxNum);
-    return sin * maxNum;
-  }
-
   var createRandomShape = function (shape, numberOfShapes) {
-    var nodes = []
+    var nodes = [];
     for(var i = 0; i < numberOfShapes; i++) {
       var randomParam = {};
       randomParam.size = {width: .03, height: .03, depth: .03};
       randomParam.translate = {x: random(1), y:random(1), z: random(1)};
-      nodes[i] = shape.init(randomParam)
+      nodes[i] = shape.create(randomParam);
     }
 
     return nodes;
   }
 
-  var nodes = createRandomShape(Node, 2000);
+  var nodes = createRandomShape(Node, 1000);
 
   addNodes(Scene, nodes);
+
+  setInterval(function () {
+    moveNodes(nodes, .03);
+  }, 100)
 
   var index = 0
   var interval = setInterval(function () {
     index++;
-    moveNodes(nodes, .02);
+    TWEEN.update();
     //globalRandFactor = Math.sin(index/100)/5;
     Scene.render();
   }, 1000/60);

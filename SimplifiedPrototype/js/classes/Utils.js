@@ -1,16 +1,21 @@
 define(['ramda'], function (ramda) {
   var random = function (maxNum) {
-    var randNum = (Math.random() * 6.2);
+
+    var buf = new Uint8Array(1);
+    window.crypto.getRandomValues(buf);
+    var randNum = buf[0]+1/512;
+
+    //var randNum = (Math.random() * 6.2);
     var sin = Math.sin(randNum);
     // console.log(sin * maxNum);
-    return sin * maxNum;
+    return randNum * sin * maxNum/10;
   }
 
   var add = function (obj, dist) {
     var newVal = {};
-    newVal.x = (obj.x || 0) + dist.x;
-    newVal.x = (obj.y || 0) + dist.y;
-    newVal.x = (obj.z || 0) + dist.z;
+    newVal.x =  dist.x;
+    newVal.x =  dist.y;
+    newVal.x =  dist.z;
 
     return newVal;
   }
