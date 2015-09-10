@@ -3,7 +3,7 @@ define(['Three'], function (Three) {
   var init = function () {
     scene = new THREE.Scene();
     camera = new THREE.PerspectiveCamera( 60, window.innerWidth / window.innerHeight, 1, 100 );
-    camera.position.z = 10;
+    camera.position.z = 6;
 
     //Ambient light
     ambientLight = new THREE.AmbientLight(0x0200ff);
@@ -14,7 +14,7 @@ define(['Three'], function (Three) {
     controls.addEventListener( 'change', render );
 
     // directional lighting
-    directionalLight = new THREE.DirectionalLight(0xffffff);
+    directionalLight = new THREE.DirectionalLight(0x777777);
     directionalLight.position.set(1, 1, 1).normalize();
     scene.add(directionalLight);
 
